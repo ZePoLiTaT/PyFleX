@@ -4,7 +4,6 @@ project(PyFleX)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
 find_package(CUDA 9.0 REQUIRED)
-find_package(pybind11 REQUIRED)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MMD -m64 -Wall -std=c++0x")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FORCE_INLINES -fPIC -fpermissive -fno-strict-aliasing -O3")
@@ -34,6 +33,7 @@ set(SOURCES ${SOURCES} ${ROOT}/bindings/opengl/shadersGL.cpp)
 set(FLEXHEADERS ${ROOT})
 set(FLEXLIB ${ROOT} ${ROOT}/lib/linux64 ${ROOT}/bindings ${ROOT}/external/SDL2-2.0.4/lib/x64)
 
+add_subidrectory(pybind11)
 pybind11_add_module(${EXAMPLE_BIN} ${SOURCES})
 target_include_directories(${EXAMPLE_BIN} PRIVATE ${FLEXHEADERS})
 target_include_directories(${EXAMPLE_BIN} PRIVATE ${FLEXLIB})
